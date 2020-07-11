@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit, :update]
 
 
   def index
@@ -31,10 +30,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @book = Book.find(params[:id])
     @user = User.find(params[:id])
-
-
+    if @user.id != current_user.id
+      redirect_to user_path(current_user)
+    end
   end
 
   def update
@@ -56,18 +55,6 @@ class UsersController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
-  end
-
-  def current_user
-  User.find_by(id: session[:user_id])
-  end
-
-  # 正しいユーザーかどうか確認
-  def correct_user
-    @micropost = current_user.find_by(id: params[:id])
-      unless @micropost
-        redirect_to users_path
-      end
   end
 
 

@@ -36,18 +36,13 @@
             <td><%= @book.body %></td>
             <td>
               <% if @book.favorited_by?(current_user) %>
-              <%= link_to book_favorites_path(@book), method: :delete do %>
-                <i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-                <%= @book.favorites.count %> いいね
-              <% end %>
-
+                <%= link_to book_favorites_path(@book), method: :delete do %>
+                  <span class="glyphicon glyphicon-heart" style="color: red;"><%= @book.favorites.count %></span>
+                <% end %>
               <% else %>
-
-              <%= link_to book_favorites_path(@book), method: :post do %>
-                <i class="fa fa-heart-o" aria-hidden="true"></i>
-                <%= @book.favorites.count %> いいね
-              <% end %>
-
+                  <%= link_to book_favorites_path(@book), method: :post do %>
+                    <span class="glyphicon glyphicon-heart-o" style="color: red;"><%= @book.favorites.count %></span>
+                  <% end %>
               <% end %>
             </td>
 
@@ -56,8 +51,41 @@
             <td><%= link_to "Destroy" ,book_path(@book.id), method: :delete %></td>
             <% end %>
           </tr>
+
         </tbody>
       </table>
+      <ol>
+        <% @book.post_comments.each do |post_comment| %>
+          <li class="comment">
+            <div class="comment-body bb">
+              <div class="comment-avatar">
+                <div class="avatar">
+                  <%= image_tag('no_image.jpg', style: "width: 60px; height: 60px;") %>
+                </div>
+              </div>
+              <div class="comment-text">
+                <div class="comment-author clearfix">
+                  <a href="#" class="link-author"><%= post_comment.user.name %></a>
+                <div class="comment-entry"><%= post_comment.comment %></div>
+                <% if post_comment.user == current_user%>
+                  <div>
+                    <%= link_to "削除", book_post_comments_path(post_comment.book, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+
+      </ol>
+      <%= form_for [@book, @post_comment] do |f| %>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+          </div>
+        </div>
+        <%= f.submit "送信", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+      <% end %>
       </div>
     </div>
 

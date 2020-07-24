@@ -60,7 +60,7 @@
                   <% end %>
                 </td>
                 <td>
-                  <%= link_to "#{book.count} コメント", book_path(@book.id) %>
+                  <%= b.post_comments.count %>件コメント
                 </td>
               </tr>
               <% end %>

@@ -49,10 +49,10 @@
             <% if @user == current_user %>
             <td><%= link_to "Edit" ,edit_book_path(@book.id) %></td>
             <td><%= link_to "Destroy" ,book_path(@book.id), method: :delete %></td>
+            <% end %>
             <td>
               <%= @book.post_comments.count %>件コメント
             </td>
-            <% end %>
           </tr>
 
         </tbody>

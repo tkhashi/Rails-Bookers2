@@ -43,7 +43,9 @@
                     <%= b.title %></th>
                     <% end %>
                 <th><%= b.body %>	</th>
-                <th colspan="3"></th>
+                <th>
+                  <%= b.post_comments.count %>件コメント
+                </th>
               </tr>
               <% end %>
             </tbody>

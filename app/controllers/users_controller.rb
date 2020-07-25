@@ -54,7 +54,7 @@ class UsersController < ApplicationController
 
   def follwer
     @user = User.find(params[:id])
-    @users = @user.reverse_of_relationships.followers
+    @users = @user.followers
 
   end
 

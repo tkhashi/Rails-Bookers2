@@ -1,0 +1,19 @@
+<h2>Followers Users</h2>
+<% unless @user.followings.nil?%>
+<% @users.each do |b| %>
+<tr>
+  <td><%= link_to user_path(b.id) do %>
+      <%= attachment_image_tag b, :profile_image, size:"40x40", format: "jpeg" ,class: "img-circle profile-img", fallback: "no_image.jpg" %></td>
+      <% end %>
+  <td><%= b.name %>	</td>
+  <th>フォロー数</th>
+  <th><%= b.followings.count %></th>
+  <th>フォロワー数</th>
+  <th><%= b.followers.count %></th>
+</tr>
+<% end %>
+
+<% else %>
+
+ユーザーはいません
+<% end %>

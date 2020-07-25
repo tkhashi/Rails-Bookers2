@@ -41,7 +41,7 @@
                 <% end %>
               <% else %>
                   <%= link_to book_favorites_path(@book), method: :post do %>
-                    <span class="glyphicon glyphicon-heart-o" style="color: red;"><%= @book.favorites.count %></span>
+                    <span class="glyphicon glyphicon-heart-empty" style="color: red;"><%= @book.favorites.count %></span>
                   <% end %>
               <% end %>
             </td>
@@ -72,7 +72,7 @@
                 <div class="comment-entry"><%= post_comment.comment %></div>
                 <% if post_comment.user == current_user%>
                   <div>
-                    <%= link_to "削除", book_post_comments_path(post_comment.book, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
+                    <%= link_to "削除", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: "btn btn-danger pull-right" %>
                   </div>
                 <% end %>
               </div>

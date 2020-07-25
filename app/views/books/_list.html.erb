@@ -25,7 +25,9 @@
                   </th>
                 </tr>
                 <td>
+                  <% unless user == current_user %>
                   <%= render "relationships/follow_button", user: @user1 %>
+                  <% end %>
                 </td>
               </tbody>
             </table>
